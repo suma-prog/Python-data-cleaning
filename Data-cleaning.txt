@@ -1,0 +1,20 @@
+import pandas as pd
+
+# Load dataset
+data = pd.read_csv('raw_data.csv')
+
+# Handle missing values
+data['revenue'].fillna(0, inplace=True)
+data['date'].fillna('2024-01-01', inplace=True)
+
+# Remove duplicates
+data.drop_duplicates(inplace=True)
+
+# Summary statistics
+summary = data.describe()
+
+# Total revenue by region
+revenue_by_region = data.groupby('region')['revenue'].sum()
+
+print(summary)
+print(revenue_by_region)
